@@ -52,9 +52,9 @@ const createEvent = async (req, res) => {
 
 const updateEvent = async (req, res) => {
   const { eventLink } = req.params;
-  const { eventName, customer, description, location, eventDateTime, RSPVBy, invitationTemplate } = req.body;
+  const { eventName, customer, description, location, eventDateTime, RSPVBy, invitationTemplate, email } = req.body;
 
-  const allowedFields = ['eventName', 'customer', 'description', 'location', 'eventDateTime', 'RSPVBy', 'invitationTemplate'];
+  const allowedFields = ['eventName', 'customer', 'description', 'location', 'eventDateTime', 'RSPVBy', 'invitationTemplate', 'email'];
 
   const extraFields = Object.keys(req.body).filter((field) => !allowedFields.includes(field));
 
@@ -63,7 +63,7 @@ const updateEvent = async (req, res) => {
     return;
   }
 
-  if (!eventName || !customer || !description || !location || !eventDateTime || !RSPVBy || !invitationTemplate) {
+  if (!eventName || !customer || !description || !location || !eventDateTime || !RSPVBy || !invitationTemplate || !email) {
     res.status(400).json({ error: 'Missing required field(s).' });
     return;
   }
