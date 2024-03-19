@@ -12,4 +12,6 @@ router.post('/');
 router.patch('/');
 
 //DEL single attendee
-router.del('/');
+router.delete('/');
+
+module.exports = router;

@@ -17,4 +17,6 @@ router.post('/', createEvent);
 router.patch('/', updateEvent);
 
 //DEL single event
-router.del('/', deleteEvent);
+router.delete('/', deleteEvent);
+
+module.exports = router;

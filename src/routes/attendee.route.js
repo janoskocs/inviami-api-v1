@@ -18,4 +18,6 @@ router.post('/', createAttendee);
 router.patch('/', updateAttendee);
 
 //DEL single attendee
-router.del('/', deleteAttendee);
+router.delete('/', deleteAttendee);
+
+module.exports = router;

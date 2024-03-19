@@ -18,4 +18,6 @@ router.post('/', createCustomer);
 router.patch('/', updateCustomer);
 
 //DEL single customer
-router.del('/', deleteCustomer);
+router.delete('/', deleteCustomer);
+
+module.exports = router;
