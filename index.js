@@ -10,6 +10,8 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     // eslint-disable-next-line no-console
+    console.log('Connected to DB, starting server...');
+    // eslint-disable-next-line no-console
     app.listen(PORT, console.log(`Connected to DB and server started on port ${PORT}`));
   })
   .catch((err) => {

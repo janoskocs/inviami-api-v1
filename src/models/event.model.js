@@ -11,6 +11,23 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true
+  },
+  paid: {
+    type: Boolean,
+    default: false
+  },
+  adminCode: {
+    type: Number,
+    required: true,
+    default: 0o0,
+  },
+  refunded: {
+    type: Boolean,
+    default: false,
+  },
   description: {
     type: String,
     required: true,
@@ -29,8 +46,26 @@ const eventSchema = new Schema({
   },
   attendees: [
     {
-      attendeeId: String,
-      createdAt: Date,
+      name: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      notes: {
+        type: String,
+        default: null,
+      },
+      arrivedToEvent: {
+        type: Boolean,
+        default: false
+      },
+      deleted: {
+        type: Boolean,
+        default: false
+      }
     },
   ],
   invitationTemplate: {
@@ -39,7 +74,8 @@ const eventSchema = new Schema({
   },
   link: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
   },
   eventApproval: {
     type: Boolean,

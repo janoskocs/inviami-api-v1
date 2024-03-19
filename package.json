@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
-    "dev": "node --watch index.js",
+    "dev": "nodemon index.js",
     "eslint:fix": "eslint --fix",
     "start": "node index.js"
   },
