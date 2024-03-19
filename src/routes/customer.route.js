@@ -6,7 +6,7 @@ const {
   createCustomer,
   updateCustomer,
   deleteCustomer
-} = require('../controllers/customers.controllers');
+} = require('../controllers/customer.controller');
 
 //GET single customer
 router.get('/', getCustomer);

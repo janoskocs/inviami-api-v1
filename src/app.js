@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 
-const EventsRoutes = require('./routes/events.routes');
-const CustomersRoutes = require('./routes/customers.routes');
-const AttendeesRoutes = require('./routes/attendees.routes');
-const AdministrationRoutes = require('./routes/administration.routes');
+const EventsRoutes = require('./routes/event.route');
+const CustomersRoutes = require('./routes/customer.route');
+const AttendeesRoutes = require('./routes/attendee.route');
+const AdministrationRoutes = require('./routes/administration.route');
 
 app.use(express.json());
 

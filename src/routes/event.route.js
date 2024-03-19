@@ -5,7 +5,7 @@ const {
   createEvent,
   updateEvent,
   deleteEvent
-} = require('../controllers/events.controllers');
+} = require('../controllers/event.controller');
 
 //GET single event
 router.get('/', getEvent);
