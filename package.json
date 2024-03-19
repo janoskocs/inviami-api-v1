@@ -1,0 +1,19 @@
+{
+  "name": "inviami-api",
+  "version": "1.0.0",
+  "description": "inviami API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janoskocs/inviami-api.git"
+  },
+  "author": "Janos Kocs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/janoskocs/inviami-api/issues"
+  },
+  "homepage": "https://github.com/janoskocs/inviami-api#readme"
+}
