@@ -9,15 +9,15 @@ const {
 } = require('../controllers/attendee.controller');
 
 //GET single attendee
-router.get('/', getAttendee);
+router.get('/:attendeeId', getAttendee);
 
 //POST single attendee
 router.post('/', createAttendee);
 
 //PATCH single attendee
-router.patch('/', updateAttendee);
+router.patch('/:attendeeId', updateAttendee);
 
 //DEL single attendee
-router.delete('/', deleteAttendee);
+router.delete('/:attendeeId', deleteAttendee);
 
 module.exports = router;

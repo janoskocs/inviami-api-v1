@@ -9,15 +9,15 @@ const {
 } = require('../controllers/customer.controller');
 
 //GET single customer
-router.get('/', getCustomer);
+router.get('/:customerId', getCustomer);
 
 //POST single customer
 router.post('/', createCustomer);
 
 //PATCH single customer
-router.patch('/', updateCustomer);
+router.patch('/:customerId', updateCustomer);
 
 //DEL single customer
-router.delete('/', deleteCustomer);
+router.delete('/:customerId', deleteCustomer);
 
 module.exports = router;

@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
   res.status(200).json({isAlive: true});
 });
   
-app.use('/api/v1/events', EventsRoutes);
-app.use('/api/v1/customers', CustomersRoutes);
-app.use('/api/v1/attendees', AttendeesRoutes);
+app.use('/api/v1/event', EventsRoutes);
+app.use('/api/v1/customer', CustomersRoutes);
+app.use('/api/v1/attendee', AttendeesRoutes);
 
 app.use('/api/v1/administration', AdministrationRoutes);
 

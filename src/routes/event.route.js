@@ -8,15 +8,15 @@ const {
 } = require('../controllers/event.controller');
 
 //GET single event
-router.get('/', getEvent);
+router.get('/:eventId', getEvent);
 
 //POST single event
 router.post('/', createEvent);
 
 //PATCH single event
-router.patch('/', updateEvent);
+router.patch('/:eventId', updateEvent);
 
 //DEL single event
-router.delete('/', deleteEvent);
+router.delete('/:eventId', deleteEvent);
 
 module.exports = router;
