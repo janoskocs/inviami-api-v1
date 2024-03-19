@@ -33,7 +33,7 @@ const eventSchema = new Schema({
       createdAt: Date,
     },
   ],
-  invitationTemaple: {
+  invitationTemplate: {
     type: String,
     required: true
   },

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 5050;
 
-
+// eslint-disable-next-line no-console
+console.log('Connecting...');
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
