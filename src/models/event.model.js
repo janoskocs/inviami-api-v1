@@ -58,6 +58,10 @@ const eventSchema = new Schema({
         type: String,
         default: null,
       },
+      isComing: {
+        type: Boolean,
+        default: false
+      },
       arrivedToEvent: {
         type: Boolean,
         default: false

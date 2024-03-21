@@ -23,58 +23,142 @@ const getEventByLink = async (req, res) => {
       RSPVBy: event.RSPVBy,
       invitationTemplate: event.invitationTemplate,
       link: event.link,
-      adminCode: event.adminCode
+      adminCode: event.adminCode,
     };
 
     res.status(200).json(filteredEvent);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to get event.', errorMessage: error.message });
+    res
+      .status(500)
+      .json({ error: 'Failed to get event.', errorMessage: error.message });
   }
 };
 
 const createEvent = async (req, res) => {
-  const {eventName, customer, description, location, eventDateTime, RSPVBy, invitationTemplate, link, email, giftCode, adminCode} = req.body;
+  const {
+    eventName,
+    customer,
+    description,
+    location,
+    eventDateTime,
+    RSPVBy,
+    invitationTemplate,
+    link,
+    email,
+    giftCode,
+    adminCode,
+  } = req.body;
 
-  const allowedFields = ['eventName', 'customer', 'description', 'location', 'eventDateTime', 'RSPVBy', 'invitationTemplate', 'link', 'email', 'giftCode', 'adminCode'];
-  const extraFields = Object.keys(req.body).filter((field) => !allowedFields.includes(field));
+  const allowedFields = [
+    'eventName',
+    'customer',
+    'description',
+    'location',
+    'eventDateTime',
+    'RSPVBy',
+    'invitationTemplate',
+    'link',
+    'email',
+    'giftCode',
+    'adminCode',
+  ];
+  const extraFields = Object.keys(req.body).filter(
+    (field) => !allowedFields.includes(field)
+  );
 
   if (extraFields.length) {
-    res.status(400).json({error: `Invalid field(s): ${extraFields.join(', ')}.`});
+    res
+      .status(400)
+      .json({ error: `Invalid field(s): ${extraFields.join(', ')}.` });
     return;
   }
 
-  if (!eventName || !customer || !description || !location || !eventDateTime || !RSPVBy || !invitationTemplate || !link || !email || !adminCode) {
-    res.status(404).json({error: 'Error creating an event. Please check all the details in: event name, customer, description, location, event date, RSPV time, link, email, adminCode.'});
+  if (
+    !eventName ||
+    !customer ||
+    !description ||
+    !location ||
+    !eventDateTime ||
+    !RSPVBy ||
+    !invitationTemplate ||
+    !link ||
+    !email ||
+    !adminCode
+  ) {
+    res
+      .status(404)
+      .json({
+        error:
+          'Error creating an event. Please check all the details in: event name, customer, description, location, event date, RSPV time, link, email, adminCode.',
+      });
     return;
   }
 
   try {
     const existingEvent = await eventModel.findOne({ link });
     if (existingEvent) {
-      res.status(400).json({ error: 'Event with the same link already exists.' });
+      res
+        .status(400)
+        .json({ error: 'Event with the same link already exists.' });
       return;
     }
     const createEvent = await eventModel.create(req.body);
     res.status(200).json(createEvent);
   } catch (error) {
-    res.status(500).json({errorMessage: 'Failed to create event. Please contact the seller.', error: error});
+    res
+      .status(500)
+      .json({
+        errorMessage: 'Failed to create event. Please contact the seller.',
+        error: error,
+      });
   }
 };
 
 const updateEvent = async (req, res) => {
   const { eventLink } = req.params;
-  const { eventName, customer, description, location, eventDateTime, RSPVBy, invitationTemplate, email } = req.body;
+  const {
+    eventName,
+    customer,
+    description,
+    location,
+    eventDateTime,
+    RSPVBy,
+    invitationTemplate,
+    email,
+  } = req.body;
 
-  const allowedFields = ['eventName', 'customer', 'description', 'location', 'eventDateTime', 'RSPVBy', 'invitationTemplate', 'email'];
+  const allowedFields = [
+    'eventName',
+    'customer',
+    'description',
+    'location',
+    'eventDateTime',
+    'RSPVBy',
+    'invitationTemplate',
+    'email',
+  ];
 
-  const extraFields = Object.keys(req.body).filter((field) => !allowedFields.includes(field));
+  const extraFields = Object.keys(req.body).filter(
+    (field) => !allowedFields.includes(field)
+  );
 
   if (extraFields.length) {
-    res.status(400).json({ error: `Invalid field(s): ${extraFields.join(', ')}` });
+    res
+      .status(400)
+      .json({ error: `Invalid field(s): ${extraFields.join(', ')}` });
     return;
   }
 
-  if (!eventName || !customer || !description || !location || !eventDateTime || !RSPVBy || !invitationTemplate || !email) {
+  if (
+    !eventName ||
+    !customer ||
+    !description ||
+    !location ||
+    !eventDateTime ||
+    !RSPVBy ||
+    !invitationTemplate ||
+    !email
+  ) {
     res.status(400).json({ error: 'Missing required field(s).' });
     return;
   }
@@ -86,10 +170,16 @@ const updateEvent = async (req, res) => {
       return;
     }
 
-    const updatedEvent = await eventModel.findOneAndUpdate({ link: eventLink }, req.body, { new: true });
+    const updatedEvent = await eventModel.findOneAndUpdate(
+      { link: eventLink },
+      req.body,
+      { new: true }
+    );
     res.status(200).json(updatedEvent);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update event.', errorMessage: error.message });
+    res
+      .status(500)
+      .json({ error: 'Failed to update event.', errorMessage: error.message });
   }
 };
 
@@ -110,7 +200,39 @@ const deleteEvent = async (req, res) => {
     );
     res.status(200).json(updatedEvent);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete event.', errorMessage: error.message });
+    res
+      .status(500)
+      .json({ error: 'Failed to delete event.', errorMessage: error.message });
+  }
+};
+
+const addAttendee = async (req, res) => {
+  const { eventLink } = req.params;
+  const { attendee } = req.body;
+
+  try {
+    const existingEvent = await eventModel.findOne({ link: eventLink });
+    if (!existingEvent) {
+      res.status(404).json({ error: 'Event not found.' });
+      return;
+    }
+
+    const updateAttendeeList = await eventModel.updateOne(
+      { link: eventLink },
+      {
+        $push: {
+          attendees: {
+            $each: [{ ...req.body, createdAt: new Date() }],
+          },
+        },
+      }
+    );
+
+    res.status(200).json(updateAttendeeList);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: 'Failed to add attendee.', errorMessage: error.message });
   }
 };
 
@@ -118,5 +240,6 @@ module.exports = {
   getEventByLink,
   createEvent,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  addAttendee,
 };

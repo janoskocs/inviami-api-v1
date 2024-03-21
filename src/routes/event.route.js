@@ -4,7 +4,8 @@ const {
   getEventByLink,
   createEvent,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  addAttendee
 } = require('../controllers/event.controller');
 
 //GET single event
@@ -15,6 +16,8 @@ router.post('/', createEvent);
 
 //PATCH single event
 router.patch('/:eventLink', updateEvent);
+
+router.patch('/:eventLink/attend', addAttendee);
 
 //DEL single event
 router.delete('/:eventLink', deleteEvent);
