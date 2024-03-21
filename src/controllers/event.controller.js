@@ -22,9 +22,9 @@ const getEventByLink = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
-  const {eventName, customer, description, location, eventDateTime, RSPVBy, invitationTemplate, link, email} = req.body;
+  const {eventName, customer, description, location, eventDateTime, RSPVBy, invitationTemplate, link, email, giftCode, adminCode} = req.body;
 
-  const allowedFields = ['eventName', 'customer', 'description', 'location', 'eventDateTime', 'RSPVBy', 'invitationTemplate', 'link', 'email'];
+  const allowedFields = ['eventName', 'customer', 'description', 'location', 'eventDateTime', 'RSPVBy', 'invitationTemplate', 'link', 'email', 'giftCode', 'adminCode'];
   const extraFields = Object.keys(req.body).filter((field) => !allowedFields.includes(field));
 
   if (extraFields.length) {
@@ -32,8 +32,8 @@ const createEvent = async (req, res) => {
     return;
   }
 
-  if (!eventName || !customer || !description || !location || !eventDateTime || !RSPVBy || !invitationTemplate || !link || !email) {
-    res.status(404).json({error: 'Error creating an event. Please check all the details in: eventName, customer, description, location, eventDateTime, RSPVBy, invitationTemplate, link, email.'});
+  if (!eventName || !customer || !description || !location || !eventDateTime || !RSPVBy || !invitationTemplate || !link || !email || !adminCode) {
+    res.status(404).json({error: 'Error creating an event. Please check all the details in: event name, customer, description, location, event date, RSPV time, link, email, adminCode.'});
     return;
   }
 
