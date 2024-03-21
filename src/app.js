@@ -1,10 +1,18 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 const EventRoutes = require('./routes/event.route');
 // const CustomersRoutes = require('./routes/customer.route');
 // const AttendeesRoutes = require('./routes/attendee.route');
 const AdministrationRoutes = require('./routes/administration.route');
+
+const {CLIENT_URL} = process.env;
+const corsOptions = {
+  origin: CLIENT_URL,
+  optionsSuccesStatus: 200
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
