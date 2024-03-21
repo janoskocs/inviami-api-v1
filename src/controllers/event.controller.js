@@ -14,8 +14,19 @@ const getEventByLink = async (req, res) => {
       res.status(404).json({ error: 'Event not found.' });
       return;
     }
+    const filteredEvent = {
+      eventName: event.eventName,
+      customer: event.customer,
+      description: event.description,
+      location: event.location,
+      eventDateTime: event.eventDateTime,
+      RSPVBy: event.RSPVBy,
+      invitationTemplate: event.invitationTemplate,
+      link: event.link,
+      adminCode: event.adminCode
+    };
 
-    res.status(200).json(event);
+    res.status(200).json(filteredEvent);
   } catch (error) {
     res.status(500).json({ error: 'Failed to get event.', errorMessage: error.message });
   }
