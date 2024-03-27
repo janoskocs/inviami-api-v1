@@ -45,8 +45,9 @@ const createEvent = async (req, res) => {
     invitationTemplate,
     link,
     email,
-    giftCode,
     adminCode,
+    isAgreedToTerms,
+    schedule,
   } = req.body;
 
   const allowedFields = [
@@ -59,8 +60,9 @@ const createEvent = async (req, res) => {
     'invitationTemplate',
     'link',
     'email',
-    'giftCode',
     'adminCode',
+    'isAgreedToTerms',
+    'schedule',
   ];
   const extraFields = Object.keys(req.body).filter(
     (field) => !allowedFields.includes(field)
@@ -83,14 +85,13 @@ const createEvent = async (req, res) => {
     !invitationTemplate ||
     !link ||
     !email ||
-    !adminCode
+    !adminCode ||
+    !isAgreedToTerms ||
+    !schedule
   ) {
-    res
-      .status(404)
-      .json({
-        error:
-          'Error creating an event. Please check all the details in: event name, customer, description, location, event date, RSPV time, link, email, adminCode.',
-      });
+    res.status(404).json({
+      error: 'Error creating an event. Please check all the details.',
+    });
     return;
   }
 
@@ -105,12 +106,10 @@ const createEvent = async (req, res) => {
     const createEvent = await eventModel.create(req.body);
     res.status(200).json(createEvent);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        errorMessage: 'Failed to create event. Please contact the seller.',
-        error: error,
-      });
+    res.status(500).json({
+      errorMessage: 'Failed to create event. Please contact the seller.',
+      error: error,
+    });
   }
 };
 

@@ -87,6 +87,10 @@ const eventSchema = new Schema(
       required: true,
       default: false,
     },
+    isAgreedToTerms: {
+      type: Boolean,
+      required: true
+    },
     deleted: {
       type: Boolean,
       default: false,
@@ -95,6 +99,20 @@ const eventSchema = new Schema(
       type: Date,
       default: null,
     },
+    schedule: [
+      {
+        activity: {
+          type: String,
+        },
+        activityHour: {
+          type: String,
+        },
+        activityIcon: {
+          type: String,
+          default: 'default-1.svg',
+        },
+      }
+    ]
   },
 
   { timestamps: true }
