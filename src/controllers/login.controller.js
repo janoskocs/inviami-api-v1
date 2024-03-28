@@ -37,6 +37,7 @@ const login = async (req, res) => {
     }
     const token = createToken(eventLink);
     return res.status(200).json({token});
+    
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }

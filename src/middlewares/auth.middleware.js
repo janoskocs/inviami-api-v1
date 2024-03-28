@@ -10,7 +10,7 @@ const checkAuth = async (req, res, next) => {
   const token = authorization.split(' ')[1];
 
   try {
-    jwt.verify(token, process.env.TOKEN_SECRET);
+    jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (error) {
     res.status(401).json({ error: 'Something went wrong, please log in again.' });
