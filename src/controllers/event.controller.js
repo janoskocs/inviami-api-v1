@@ -1,4 +1,5 @@
 const eventModel = require('../models/event.model');
+const bcrypt = require('bcrypt');
 
 const getEventByLink = async (req, res) => {
   const { eventLink } = req.params;
@@ -14,6 +15,8 @@ const getEventByLink = async (req, res) => {
       res.status(404).json({ error: 'Event not found.' });
       return;
     }
+
+
     const filteredEvent = {
       eventName: event.eventName,
       customer: event.customer,
@@ -23,7 +26,6 @@ const getEventByLink = async (req, res) => {
       RSPVBy: event.RSPVBy,
       invitationTemplate: event.invitationTemplate,
       link: event.link,
-      adminCode: event.adminCode,
     };
 
     res.status(200).json(filteredEvent);
@@ -94,6 +96,10 @@ const createEvent = async (req, res) => {
     });
     return;
   }
+
+  const salt = await bcrypt.genSalt();
+  const hash = await bcrypt.hash(adminCode.toString(), salt);
+  req.body.adminCode = hash;
 
   try {
     const existingEvent = await eventModel.findOne({ link });
