@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
   
 app.use('/api/v1/event', EventRoutes);
 
-app.use(checkAuth);
 app.use('/api/v1/administration', AdministrationRoutes);
 
 module.exports = app;
