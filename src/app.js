@@ -6,6 +6,7 @@ const EventRoutes = require('./routes/event.route');
 // const CustomersRoutes = require('./routes/customer.route');
 // const AttendeesRoutes = require('./routes/attendee.route');
 const AdministrationRoutes = require('./routes/administration.route');
+const checkAuth = require('./middlewares/auth.middleware');
 
 const {CLIENT_URL} = process.env;
 const corsOptions = {
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
   
 app.use('/api/v1/event', EventRoutes);
 
+app.use(checkAuth);
 app.use('/api/v1/administration', AdministrationRoutes);
 
 module.exports = app;

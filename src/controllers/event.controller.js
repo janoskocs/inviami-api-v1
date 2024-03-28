@@ -99,6 +99,7 @@ const createEvent = async (req, res) => {
 
   const salt = await bcrypt.genSalt();
   const hash = await bcrypt.hash(adminCode.toString(), salt);
+  const adminCodeToUser = req.body.adminCode;
   req.body.adminCode = hash;
 
   try {
@@ -110,7 +111,7 @@ const createEvent = async (req, res) => {
       return;
     }
     const createEvent = await eventModel.create(req.body);
-    res.status(200).json(createEvent);
+    res.status(200).json({...createEvent, adminCode: adminCodeToUser});
   } catch (error) {
     res.status(500).json({
       errorMessage: 'Failed to create event. Please contact the seller.',

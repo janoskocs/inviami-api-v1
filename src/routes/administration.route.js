@@ -3,15 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 //GET single attendee
-router.get('/');
+router.get('/:eventLink', (req, res) => {
+  const {eventLink} = req.params;
+  console.log(eventLink);
+});
 
-//POST single attendee
-router.post('/');
-
-//PATCH single attendee
-router.patch('/');
-
-//DEL single attendee
-router.delete('/');
 
 module.exports = router;

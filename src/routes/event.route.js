@@ -7,6 +7,7 @@ const {
   deleteEvent,
   addAttendee
 } = require('../controllers/event.controller');
+const checkAuth = require('../middlewares/auth.middleware');
 
 //GET single event
 router.get('/:eventLink', getEventByLink);
@@ -21,8 +22,5 @@ router.patch('/:eventLink/attend', addAttendee);
 
 //DEL single event
 router.delete('/:eventLink', deleteEvent);
-
-//GET event details and attendees
-router.get('/:eventLink/admin', getEventByLink);
 
 module.exports = router;
