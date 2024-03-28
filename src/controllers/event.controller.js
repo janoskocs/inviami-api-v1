@@ -26,6 +26,7 @@ const getEventByLink = async (req, res) => {
       RSPVBy: event.RSPVBy,
       invitationTemplate: event.invitationTemplate,
       link: event.link,
+      schedule: event.schedule,
     };
 
     res.status(200).json(filteredEvent);
