@@ -47,7 +47,7 @@ const eventSchema = new Schema(
     },
     attendees: [
       {
-        name: {
+        attendeeName: {
           type: String,
           required: true,
         },

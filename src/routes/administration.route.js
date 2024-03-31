@@ -4,7 +4,6 @@ const eventModel = require('../models/event.model');
 const checkAuth = require('../middlewares/auth.middleware');
 const login = require('../controllers/login.controller');
 const jwt = require('jsonwebtoken');
-const { del } = require('superagent');
 
 //GET single attendee
 router.post('/login', login);
