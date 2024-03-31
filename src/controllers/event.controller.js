@@ -215,7 +215,6 @@ const deleteEvent = async (req, res) => {
 
 const addAttendee = async (req, res) => {
   const { eventLink } = req.params;
-  const { attendee } = req.body;
 
   try {
     const existingEvent = await eventModel.findOne({ link: eventLink });
@@ -242,6 +241,7 @@ const addAttendee = async (req, res) => {
       .json({ error: 'Failed to add attendee.', errorMessage: error.message });
   }
 };
+
 
 module.exports = {
   getEventByLink,
