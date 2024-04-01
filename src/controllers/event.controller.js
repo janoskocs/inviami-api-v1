@@ -16,7 +16,6 @@ const getEventByLink = async (req, res) => {
       return;
     }
 
-
     const filteredEvent = {
       eventName: event.eventName,
       customer: event.customer,
@@ -111,8 +110,22 @@ const createEvent = async (req, res) => {
         .json({ error: 'Event with the same link already exists.' });
       return;
     }
+
     const createEvent = await eventModel.create(req.body);
-    res.status(200).json({...createEvent, adminCode: adminCodeToUser});
+    const sendConfirmation = await eventModel.findOne({ link: req.body.link });
+    const confirmationObject = {
+      eventName: sendConfirmation.eventName,
+      customer: sendConfirmation.customer,
+      description: sendConfirmation.description,
+      location: sendConfirmation.location,
+      eventDateTime: sendConfirmation.eventDateTime,
+      RSPVBy: sendConfirmation.RSPVBy,
+      invitationTemplate: sendConfirmation.invitationTemplate,
+      link: sendConfirmation.link,
+      schedule: sendConfirmation.schedule,
+    };
+    
+    res.status(200).json({ ...confirmationObject, adminCode: adminCodeToUser });
   } catch (error) {
     res.status(500).json({
       errorMessage: 'Failed to create event. Please contact the seller.',
@@ -241,7 +254,6 @@ const addAttendee = async (req, res) => {
       .json({ error: 'Failed to add attendee.', errorMessage: error.message });
   }
 };
-
 
 module.exports = {
   getEventByLink,
