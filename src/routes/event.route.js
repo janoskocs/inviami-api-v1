@@ -5,7 +5,8 @@ const {
   createEvent,
   updateEvent,
   deleteEvent,
-  addAttendee
+  addAttendee,
+  checkLink
 } = require('../controllers/event.controller');
 const checkAuth = require('../middlewares/auth.middleware');
 
@@ -14,6 +15,8 @@ router.get('/:eventLink', getEventByLink);
 
 //POST single event
 router.post('/', createEvent);
+
+router.post('/checkLink', checkLink);
 
 //PATCH single event
 router.patch('/:eventLink', updateEvent);

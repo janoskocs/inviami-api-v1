@@ -255,10 +255,28 @@ const addAttendee = async (req, res) => {
   }
 };
 
+const checkLink = async (req, res) => {
+  const { link } = req.body;
+
+  try {
+    const existingEvent = await eventModel.findOne({ link });
+    if (!existingEvent) {
+      res.status(200).json({ message: 'Event link is valid.', available: true});
+    } else {
+      res.status(200).json({ message: 'Event link is not available.', available: false });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: 'Failed to check event link.', errorMessage: error.message });
+  }
+};
+
 module.exports = {
   getEventByLink,
   createEvent,
   updateEvent,
   deleteEvent,
   addAttendee,
+  checkLink
 };
