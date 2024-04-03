@@ -43,7 +43,7 @@ const createEvent = async (req, res) => {
     description,
     location,
     eventDateTime,
-    RSPVBy,
+    // RSPVBy,
     invitationTemplate,
     link,
     email,
@@ -58,7 +58,7 @@ const createEvent = async (req, res) => {
     'description',
     'location',
     'eventDateTime',
-    'RSPVBy',
+    // 'RSPVBy',
     'invitationTemplate',
     'link',
     'email',
@@ -83,7 +83,7 @@ const createEvent = async (req, res) => {
     !description ||
     !location ||
     !eventDateTime ||
-    !RSPVBy ||
+    // !RSPVBy ||
     !invitationTemplate ||
     !link ||
     !email ||
