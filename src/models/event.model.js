@@ -12,10 +12,10 @@ const eventSchema = new Schema(
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-    },
+    // email: {
+    //   type: String,
+    //   required: true,
+    // },
     paid: {
       type: Boolean,
       default: false,
@@ -41,20 +41,20 @@ const eventSchema = new Schema(
       type: Date,
       required: true,
     },
-    RSPVBy: {
-      type: Date,
-      required: false,
-    },
+    // RSPVBy: {
+    //   type: Date,
+    //   required: false,
+    // },
     attendees: [
       {
         attendeeName: {
           type: String,
           required: true,
         },
-        email: {
-          type: String,
-          required: true,
-        },
+        // email: {
+        //   type: String,
+        //   required: true,
+        // },
         notes: {
           type: String,
           default: null,

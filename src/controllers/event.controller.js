@@ -18,11 +18,11 @@ const getEventByLink = async (req, res) => {
 
     const filteredEvent = {
       eventName: event.eventName,
-      customer: event.customer,
+      // customer: event.customer,
       description: event.description,
       location: event.location,
       eventDateTime: event.eventDateTime,
-      RSPVBy: event.RSPVBy,
+      // RSPVBy: event.RSPVBy,
       invitationTemplate: event.invitationTemplate,
       link: event.link,
       schedule: event.schedule,
@@ -46,7 +46,7 @@ const createEvent = async (req, res) => {
     // RSPVBy,
     invitationTemplate,
     link,
-    email,
+    // email,
     adminCode,
     isAgreedToTerms,
     schedule,
@@ -61,7 +61,7 @@ const createEvent = async (req, res) => {
     // 'RSPVBy',
     'invitationTemplate',
     'link',
-    'email',
+    // 'email',
     'adminCode',
     'isAgreedToTerms',
     'schedule',
@@ -86,7 +86,7 @@ const createEvent = async (req, res) => {
     // !RSPVBy ||
     !invitationTemplate ||
     !link ||
-    !email ||
+    // !email ||
     !adminCode ||
     !isAgreedToTerms ||
     !schedule
@@ -115,11 +115,11 @@ const createEvent = async (req, res) => {
     const sendConfirmation = await eventModel.findOne({ link: req.body.link });
     const confirmationObject = {
       eventName: sendConfirmation.eventName,
-      customer: sendConfirmation.customer,
+      // customer: sendConfirmation.customer,
       description: sendConfirmation.description,
       location: sendConfirmation.location,
       eventDateTime: sendConfirmation.eventDateTime,
-      RSPVBy: sendConfirmation.RSPVBy,
+      // RSPVBy: sendConfirmation.RSPVBy,
       invitationTemplate: sendConfirmation.invitationTemplate,
       link: sendConfirmation.link,
       schedule: sendConfirmation.schedule,
@@ -142,9 +142,9 @@ const updateEvent = async (req, res) => {
     description,
     location,
     eventDateTime,
-    RSPVBy,
+    // RSPVBy,
     invitationTemplate,
-    email,
+    // email,
   } = req.body;
 
   const allowedFields = [
@@ -153,9 +153,9 @@ const updateEvent = async (req, res) => {
     'description',
     'location',
     'eventDateTime',
-    'RSPVBy',
+    // 'RSPVBy',
     'invitationTemplate',
-    'email',
+    // 'email',
   ];
 
   const extraFields = Object.keys(req.body).filter(
@@ -175,9 +175,9 @@ const updateEvent = async (req, res) => {
     !description ||
     !location ||
     !eventDateTime ||
-    !RSPVBy ||
-    !invitationTemplate ||
-    !email
+    // !RSPVBy ||
+    !invitationTemplate 
+    // !|| email
   ) {
     res.status(400).json({ error: 'Missing required field(s).' });
     return;
