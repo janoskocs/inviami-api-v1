@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
     description: event.description,
     location: event.location,
     eventDateTime: event.eventDateTime,
-    RSPVBy: event.RSPVBy,
+    // RSPVBy: event.RSPVBy,
     invitationTemplate: event.invitationTemplate,
     link: event.link,
     schedule: event.schedule,

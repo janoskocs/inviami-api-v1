@@ -100,6 +100,8 @@ const createEvent = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hash = await bcrypt.hash(adminCode.toString(), salt);
   const adminCodeToUser = req.body.adminCode;
+  console.log(adminCodeToUser);
+
   req.body.adminCode = hash;
 
   try {
@@ -110,7 +112,7 @@ const createEvent = async (req, res) => {
         .json({ error: 'Event with the same link already exists.' });
       return;
     }
-
+    console.log(req.body.adminCode);
     const createEvent = await eventModel.create(req.body);
     const sendConfirmation = await eventModel.findOne({ link: req.body.link });
     const confirmationObject = {
@@ -124,7 +126,7 @@ const createEvent = async (req, res) => {
       link: sendConfirmation.link,
       schedule: sendConfirmation.schedule,
     };
-    
+
     res.status(200).json({ ...confirmationObject, adminCode: adminCodeToUser });
   } catch (error) {
     res.status(500).json({
@@ -176,7 +178,7 @@ const updateEvent = async (req, res) => {
     !location ||
     !eventDateTime ||
     // !RSPVBy ||
-    !invitationTemplate 
+    !invitationTemplate
     // !|| email
   ) {
     res.status(400).json({ error: 'Missing required field(s).' });
@@ -261,14 +263,21 @@ const checkLink = async (req, res) => {
   try {
     const existingEvent = await eventModel.findOne({ link });
     if (!existingEvent) {
-      res.status(200).json({ message: 'Event link is valid.', available: true});
+      res
+        .status(200)
+        .json({ message: 'Event link is valid.', available: true });
     } else {
-      res.status(200).json({ message: 'Event link is not available.', available: false });
+      res
+        .status(200)
+        .json({ message: 'Event link is not available.', available: false });
     }
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'Failed to check event link.', errorMessage: error.message });
+      .json({
+        error: 'Failed to check event link.',
+        errorMessage: error.message,
+      });
   }
 };
 
@@ -278,5 +287,5 @@ module.exports = {
   updateEvent,
   deleteEvent,
   addAttendee,
-  checkLink
+  checkLink,
 };
