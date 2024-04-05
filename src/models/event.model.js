@@ -103,9 +103,11 @@ const eventSchema = new Schema(
       {
         activity: {
           type: String,
+          default: 'Activity',
         },
         activityHour: {
           type: String,
+          default: '00:00',
         },
         activityIcon: {
           type: String,
