@@ -100,7 +100,6 @@ const createEvent = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hash = await bcrypt.hash(adminCode.toString(), salt);
   const adminCodeToUser = req.body.adminCode;
-  console.log(adminCodeToUser);
 
   req.body.adminCode = hash;
 
@@ -112,7 +111,6 @@ const createEvent = async (req, res) => {
         .json({ error: 'Event with the same link already exists.' });
       return;
     }
-    console.log(req.body.adminCode);
     const createEvent = await eventModel.create(req.body);
     const sendConfirmation = await eventModel.findOne({ link: req.body.link });
     const confirmationObject = {
