@@ -28,10 +28,10 @@ jobs:
     - name: 'Create env file'
       run: |
           touch .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
           echo PORT=${{ secrets.PORT}} >> .env
           echo MONGO_ADMIN=${{ secrets.MONGO_ADMIN }} >> .env
           echo MONGO_AUTH=${{ secrets.MONGO_AUTH }} >> .env
-          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
           echo CLIENT_URL=${{ secrets.CLIENT_URL }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
     - run: npm ci
