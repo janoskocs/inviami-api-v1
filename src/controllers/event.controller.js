@@ -18,6 +18,7 @@ const getEventByLink = async (req, res) => {
 
     const filteredEvent = {
       eventName: event.eventName,
+      occasionTitle: event.occasionTitle,
       // customer: event.customer,
       description: event.description,
       location: event.location,
@@ -42,6 +43,7 @@ const createEvent = async (req, res) => {
     customer,
     description,
     location,
+    occasionTitle,
     eventDateTime,
     // RSPVBy,
     invitationTemplate,
@@ -57,6 +59,7 @@ const createEvent = async (req, res) => {
     'customer',
     'description',
     'location',
+    'occasionTitle',
     'eventDateTime',
     // 'RSPVBy',
     'invitationTemplate',
@@ -83,6 +86,7 @@ const createEvent = async (req, res) => {
     !description ||
     !location ||
     !eventDateTime ||
+    !occasionTitle ||
     // !RSPVBy ||
     !invitationTemplate ||
     !link ||
@@ -115,6 +119,7 @@ const createEvent = async (req, res) => {
     const sendConfirmation = await eventModel.findOne({ link: req.body.link });
     const confirmationObject = {
       eventName: sendConfirmation.eventName,
+      occasionTitle: sendConfirmation.occasionTitle,
       // customer: sendConfirmation.customer,
       description: sendConfirmation.description,
       location: sendConfirmation.location,
@@ -142,6 +147,7 @@ const updateEvent = async (req, res) => {
     description,
     location,
     eventDateTime,
+    occasionTitle,
     // RSPVBy,
     invitationTemplate,
     // email,
@@ -151,6 +157,7 @@ const updateEvent = async (req, res) => {
     'eventName',
     'customer',
     'description',
+    'occasionTitle',
     'location',
     'eventDateTime',
     // 'RSPVBy',
@@ -174,6 +181,7 @@ const updateEvent = async (req, res) => {
     !customer ||
     !description ||
     !location ||
+    !occasionTitle ||
     !eventDateTime ||
     // !RSPVBy ||
     !invitationTemplate

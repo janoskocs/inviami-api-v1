@@ -16,6 +16,11 @@ const eventSchema = new Schema(
     //   type: String,
     //   required: true,
     // },
+    occasionTitle: {
+      type: String,
+      required: true,
+      default: 'Let\'s celebrate!',
+    },
     paid: {
       type: Boolean,
       default: false,
