@@ -6,7 +6,15 @@ name: Node.js CI
 on:
   push:
     branches: [ "main" ]
-
+    
+env:
+  PORT: ${{ secrets.PORT }}
+  MONGO_ADMIN: ${{ secrets.MONGO_ADMIN }}
+  MONGO_AUTH: ${{ secrets.MONGO_AUTH }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  CLIENT_URL: ${{ secrets.CLIENT_URL }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  
 jobs:
   build:
 
@@ -28,11 +36,11 @@ jobs:
     - name: 'Create env file'
       run: |
           touch .env
-          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-          echo PORT=${{ secrets.PORT}} >> .env
-          echo MONGO_ADMIN=${{ secrets.MONGO_ADMIN }} >> .env
-          echo MONGO_AUTH=${{ secrets.MONGO_AUTH }} >> .env
-          echo CLIENT_URL=${{ secrets.CLIENT_URL }} >> .env
-          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo MONGODB_URI=MONGODB_URI >> .env
+          echo PORT=PORT >> .env
+          echo MONGO_ADMIN=MONGO_ADMIN >> .env
+          echo MONGO_AUTH=MONGO_AUTH >> .env
+          echo CLIENT_URL=CLIENT_URL >> .env
+          echo JWT_SECRET=JWT_SECRET >> .env
     - run: npm ci
     - run: npm run build --if-present
