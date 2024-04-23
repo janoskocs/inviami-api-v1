@@ -104,6 +104,15 @@ const eventSchema = new Schema(
       type: Date,
       default: null,
     },
+    celebratedPerson: {
+      type: String,
+      required: true,
+    },
+    age: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
     schedule: [
       {
         activity: {

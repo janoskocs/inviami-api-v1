@@ -24,7 +24,7 @@ const corsOptions = {
   origin: CLIENT_URL,
   optionsSuccesStatus: 200,
 };
-
+//add corsoptions
 app.use(cors(corsOptions));
 
 const limiter = rateLimit({

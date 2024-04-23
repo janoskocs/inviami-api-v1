@@ -27,6 +27,8 @@ const getEventByLink = async (req, res) => {
       invitationTemplate: event.invitationTemplate,
       link: event.link,
       schedule: event.schedule,
+      celebratedPerson: event.celebratedPerson,
+      age: event.age,
     };
 
     res.status(200).json(filteredEvent);
@@ -52,6 +54,8 @@ const createEvent = async (req, res) => {
     adminCode,
     isAgreedToTerms,
     schedule,
+    celebratedPerson,
+    age,
   } = req.body;
 
   const allowedFields = [
@@ -68,6 +72,8 @@ const createEvent = async (req, res) => {
     'adminCode',
     'isAgreedToTerms',
     'schedule',
+    'celebratedPerson',
+    'age',
   ];
   const extraFields = Object.keys(req.body).filter(
     (field) => !allowedFields.includes(field)
@@ -93,7 +99,8 @@ const createEvent = async (req, res) => {
     // !email ||
     !adminCode ||
     !isAgreedToTerms ||
-    !schedule
+    !schedule ||
+    !celebratedPerson
   ) {
     res.status(404).json({
       error: 'Error creating an event. Please check all the details.',
@@ -128,6 +135,8 @@ const createEvent = async (req, res) => {
       invitationTemplate: sendConfirmation.invitationTemplate,
       link: sendConfirmation.link,
       schedule: sendConfirmation.schedule,
+      celebratedPerson: sendConfirmation.celebratedPerson,
+      age: sendConfirmation.age,
     };
 
     res.status(200).json({ ...confirmationObject, adminCode: adminCodeToUser });
