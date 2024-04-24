@@ -12,7 +12,7 @@ const EventRoutes = require('./routes/event.route');
 const AdministrationRoutes = require('./routes/administration.route');
 const checkAuth = require('./middlewares/auth.middleware');
 
-app.use(express.json({ limit: '1kb' }));
+app.use(express.json({ limit: '5kb' }));
 app.use(helmet());
 
 app.disable('x-powered-by');
